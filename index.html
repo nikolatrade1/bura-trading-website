@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bura Fundamental Trading</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 5px solid #e67e22;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: bold;
+        }
+        header p {
+            font-size: 1.2em;
+            margin: 10px 0 0;
+            font-style: italic;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .twitter-embed {
+            flex: 1;
+            min-width: 300px;
+        }
+        .video-slider {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .video-slider iframe {
+            width: 100%;
+            height: 550px;
+            border: none;
+            display: none;
+            border-radius: 2%;
+        }
+        .video-slider iframe.active {
+            display: block;
+        }
+        .slider-controls {
+            position: absolute;
+            top: 45%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .slider-controls button {
+            background-color: rgba(230, 126, 34, 0.8);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-controls button:hover {
+            background-color: rgba(211, 84, 0, 0.8);
+        }
+        .date-container {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        .clock-container {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+        .tradingview-chart {
+            width: 100%;
+            height: 700px;
+            margin: 20px 0;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            border-top: 5px solid #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bura Fundamental Trading</h1>
+        <p>Your trusted partner in trading and market analysis</p>
+    </header>
+
+    <main>
+        <!-- Twitter Embed -->
+        <div class="twitter-embed">
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/search?q=%24EURUSD&amp;src=ctag&amp;ref_src=twsrc%5Etfw">$EURUSD</a> trade<br>- resistance level about 1.04 level<br>- i have entered from 4h fvg <a href="https://t.co/q0aInTHZWm">pic.twitter.com/q0aInTHZWm</a></p>&mdash; Bura Trades (@Bura_trade) <a href="https://twitter.com/Bura_trade/status/1876618428192288836?ref_src=twsrc%5Etfw">January 7, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+
+        <!-- Video Slider on the Right -->
+        <div class="video-slider">
+            <iframe src="https://www.youtube.com/embed/JJhmEtow7R4" class="active"></iframe>
+            <iframe src="https://www.youtube.com/embed/fJIZaCjWeXU"></iframe>
+            <iframe src="https://www.youtube.com/embed/l1bZDQzk3qM"></iframe>
+            <iframe src="https://www.youtube.com/embed/HQbyrurvlRo"></iframe>
+            <iframe src="https://www.youtube.com/embed/d5_UDmKHHqg"></iframe>
+            <div class="slider-controls">
+                <button onclick="prevVideo()">&#10094;</button>
+                <button onclick="nextVideo()">&#10095;</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Today's Date and Clock -->
+    <div class="date-container">
+        <strong>Today's Date:</strong> <span id="todayDate"></span>
+    </div>
+    <div class="clock-container">
+        <strong>Current Time:</strong> <span id="liveClock"></span>
+    </div>
+
+    <!-- TradingView Chart -->
+    <div class="tradingview-chart">
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+            new TradingView.widget({
+                "width": "100%",
+                "height": "700",
+                "symbol": "FX:EURUSD",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "hide_side_toolbar": false,
+                "allow_symbol_change": true,
+                "container_id": "tradingview-chart"
+            });
+        </script>
+    </div>
+
+can i change color of the charts and background color as i can change that on tradingview app
+
+    <footer>
+        <p>&copy; 2023 Bura Fundamental Trading. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Automatically update today's date
+        const dateElement = document.getElementById('todayDate');
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = today.toLocaleDateString('en-US', options);
+
+        // Live Clock
+        const clockElement = document.getElementById('liveClock');
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            clockElement.textContent = time;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Video Slider Functionality
+        let currentVideoIndex = 0;
+        const videos = document.querySelectorAll('.video-slider iframe');
+
+        function showVideo(index) {
+            videos.forEach((video, i) => {
+                video.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextVideo() {
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            showVideo(currentVideoIndex);
+        }
+
+        function prevVideo() {
+            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+            showVideo(currentVideoIndex);
+        }
+
+        // Initialize the first video
+        showVideo(currentVideoIndex);
+    </script>
+</body>
+</html>
