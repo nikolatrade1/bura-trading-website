@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bura Trading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fee748fab0.js" crossorigin="anonymous"></script>
+    <style>
+                html {
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+        }
+        /* Dodat ćemo CSS za stilizaciju */
+        body {
+            margin: 0;
+            font-family: Montserrat;
+            background-color: whitesmoke;
+            color: #333;
+        }
+
+        section {
+            position: relative;
+            height: 40vh; /* Cijela visina ekrana */
+            display: flex;  
+            padding: 20px;
+            background-color: gainsboro;
+            border: 1px solid gray;
+            border-radius: 10px;
+            color: #333;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        nav {
+            position: fixed; /* Fixed position */
+            max-width: 1400px;
+            margin: auto;
+            top: 0; /* Stick to the top */
+            left: 0; /* Align to the left */
+            right: 0; /* Stretch across the width */
+            display: flex;
+            justify-content: flex-end; /* Align links to the right */
+            gap: 20px;
+            padding: 20px; /* Add padding for spacing */
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1; /* Ensure it stays above other content */
+}
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            font-weight: 500;
+            text-decoration: underline;
+            z-index: 1;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        h2 {
+            font-size: 48px;
+            margin: 0;
+            text-align: right;
+            z-index: 1;
+        }
+
+        .time {
+            text-align: right;
+            font-size: 18px;
+            z-index: 1;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .tradingview-widget-container {
+            margin: 20px;
+        }
+
+        #contact {
+            height: 6vh;
+            background-color: gainsboro;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-evenly;
+            margin-top: 30px;
+            
+        }
+
+        .social {
+            display: flex;
+            flex-direction: row;
+            gap: 30px; /* Space between icons and text */
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        .social a {
+            display: flex;
+            align-items: center;
+            color: rgb(75, 75, 75); /* Default gray text color */
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s; /* Smooth transitions */
+            padding: 8px 12px; /* Add some padding for better clickability */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .social a:hover {
+            color: #2c2c2c; /* White text on hover */
+            box-shadow: 0 4px 10px rgba(49, 49, 49, 0.4); /* Subtle gold shadow */
+            transform: scale(1.05); /* Slightly enlarge the link */
+        }
+
+        .social i {
+            font-size: 24px; /* Icon size */
+        }
+
+        #fundamenti{
+            margin-top: 30px;
+            height: 30vh;
+            
+        }
+
+        .text p {
+            text-align: justify; /* Justifies the text */
+            line-height: 1.8; /* Increases the gap between rows (adjust as needed) */
+            margin: 20px 0; /* Adds space above and below the paragraph */
+            font-size: 16px; /* Optional: Adjust font size for better readability */
+        }
+
+        .gallery-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-top: 50px;
+        }
+
+        .gallery-container {
+            position: relative;
+            max-width: 1400px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slike {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            background-color: white;
+            height: 500px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slike img {
+            width: 30%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slike img:hover {
+            transform: scale(1.1);
+        }
+
+        .arrow {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: 0.5s;
+            height: 80px;
+            margin: 0 5%;
+            border-radius: 10%;
+        }
+
+        .arrow:hover {
+            background-color: rgba(143, 143, 143, 0.8);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+        }
+
+        #gallery-naslov {
+            text-align: left;
+            color: whitesmoke;
+            max-width: 1400px;
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 0px;
+        }
+
+        
+
+
+
+        /* Responsive Design za mobilne uređaje */
+@media only screen and (max-width: 768px) {
+    /* Podešavanje navigacije za manje ekrane */
+    nav {
+        justify-content: center; /* Centriraj linkove */
+        padding: 10px; /* Smanji padding */
+        gap: 10px; /* Smanji razmak između linkova */
+    }
+
+    nav a {
+        font-size: 16px; /* Smanji veličinu fonta */
+    }
+
+    /* Podešavanje sekcija za manje ekrane */
+    section {
+        height: 30vh; /* Smanji visinu sekcije */
+        padding: 10px; /* Smanji padding */
+    }
+
+    h2 {
+        font-size: 32px; /* Smanji veličinu naslova */
+    }
+
+    .time {
+        font-size: 14px; /* Smanji veličinu vremena */
+    }
+
+    /* Podešavanje teksta za manje ekrane */
+    .text p {
+        font-size: 14px; /* Smanji veličinu fonta */
+        line-height: 1.6; /* Smanji razmak između redova */
+    }
+
+    /* Podešavanje galerije za manje ekrane */
+    .gallery-wrapper {
+        flex-direction: column; /* Postavi strelice iznad i ispod galerije */
+        align-items: center;
+    }
+
+    .slike {
+        flex-direction: column; /* Postavi slike jedna ispod druge */
+        height: auto; /* Automatska visina */
+        gap: 10px; /* Smanji razmak između slika */
+    }
+
+    .slike img {
+        width: 100%; /* Slike zauzimaju punu širinu */
+        height: auto; /* Automatska visina */
+    }
+
+    .arrow {
+        margin: 10px 0; /* Smanji margine za strelice */
+        padding: 10px; /* Smanji padding */
+    }
+
+    /* Podešavanje kontakt sekcije za manje ekrane */
+    #contact {
+        height: auto; /* Automatska visina */
+        padding: 10px; /* Smanji padding */
+    }
+
+    .social {
+        flex-direction: column; /* Postavi ikone jedna ispod druge */
+        gap: 10px; /* Smanji razmak između ikona */
+    }
+
+    .social a {
+        font-size: 16px; /* Smanji veličinu fonta */
+    }
+
+    /* Podešavanje footera za manje ekrane */
+    footer {
+        font-size: 14px; /* Smanji veličinu fonta */
+    }
+
+    #fundamenti{
+        height: 50%;   
+        }
+
+    }
+    .number-nav {
+        margin: auto;
+        max-width: 1400px;
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .number {
+        cursor: pointer;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .number:hover {
+        background-color: rgba(143, 143, 143, 0.8);
+        transform: scale(1.05); /* Slightly enlarge the link */
+    }
+
+    .number.active {
+        background-color: #dbdbdb;
+        color: black;
+    }
+    </style>
+</head>
+<body>
+    <section>
+        <!-- Navigacija -->
+        <nav>
+            <a href="#">Home</a>
+            <a href="#contact">Contact</a>
+            <a href="#gallery-naslov">Gallery</a>
+        </nav>
+
+        <!-- Video u pozadini -->
+        <video autoplay muted loop>
+            <source src="video/video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Naslov i vrijeme -->
+        <div class="content">
+            <h2>Bura Trading</h2>
+            <div class="time">
+                <p id="date">DATA:</p>
+                <p id="time">TIME:</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TradingView Ticker Tape Widget -->
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+    </div>
+
+    
+
+    <section id="fundamenti">
+        <div class="text">
+            <h3>Why Fundamentals and News Are Important in Trading?</h2>
+            <p>In trading, fundamentals and news play a crucial role in understanding the intrinsic value of an asset and predicting its future price movements. Fundamentals refer to the underlying factors that affect the financial health and performance of a company, sector, or economy, such as earnings reports, interest rates, GDP growth, and employment data. News, on the other hand, includes real-time events like geopolitical developments, central bank announcements, and unexpected market-moving events. Together, they provide traders with a comprehensive view of the market, helping them make informed decisions. For example, a strong earnings report can boost a company's stock price, while a sudden interest rate hike by a central bank can cause currency fluctuations. By incorporating fundamentals and news into their strategy, traders can identify opportunities, manage risks, and stay ahead of market trends.</p>
+            <p>
+                Combining <b>FUNDAMENTAL</b> analysis with <b>TECHNICAL</b> analysis is a powerful approach to trading, as it allows you to understand both the <b>"why"</b> and the <b>"when"</b> of market movements.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="social">
+            <a href="https://x.com/Bura_trade" target="_blank">
+                <i class="fa-brands fa-square-x-twitter"></i>
+                <p>Twitter</p>
+            </a>
+            <a href="https://www.youtube.com/channel/UC0zF-NpYr21OVED93FBRlCw" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+                <p>YouTube</p>
+            </a>
+            <a href="mailto:example@gmail.com">
+                <i class="fa-solid fa-envelope"></i>
+                <p>Gmail</p>
+            </a>
+        </div>
+    </section>
+
+    <h2 id="gallery-naslov">RECENT TRADES:</h2>
+    <!-- Numbered Navigation -->
+    <div class="number-nav">
+        <span class="number" onclick="loadAlbum(0)">1</span>
+        <span class="number" onclick="loadAlbum(1)">2</span>
+        <span class="number" onclick="loadAlbum(2)">3</span>
+        <span class="number" onclick="loadAlbum(3)">4</span>
+        <span class="number" onclick="loadAlbum(4)">5</span>
+    </div>
+    <div class="gallery-wrapper">
+        <div class="gallery-container">
+            <div class="slike" id="gallery">
+                <!-- Images will be inserted here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeOverlay()">
+        <span class="close-btn">&times;</span>
+        <img id="fullImage" src="">
+    </div>
+    <script src="ticker.js"></script> <!-- Učitavanje JavaScript fajla -->
+
+
+    <footer>
+        © 2025 Bura Trading, All Rights Reserved
+    </footer>
+
+    <script>
+        // Funkcija za ažuriranje datuma i vremena
+        function updateDateTime() {
+            const now = new Date();
+            const dateElement = document.getElementById('date');
+            const timeElement = document.getElementById('time');
+
+            // Formatiranje datuma
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            dateElement.textContent = `DATA: ${now.toLocaleDateString('en-GB', options)}`;
+
+            // Formatiranje vremena
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeElement.textContent = `TIME: ${hours}:${minutes}`;
+        }
+
+        // Ažuriraj svake sekunde
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // Pozovi odmah prvi put
+
+        // TRADINGVIEW
+        document.addEventListener("DOMContentLoaded", function() {
+            let script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "symbols": [
+                    { "proName": "FOREXCOM:EURUSD", "title": "EUR/USD" },
+                    { "proName": "FOREXCOM:GBPUSD", "title": "GBP/USD" },
+                    { "proName": "FOREXCOM:USDJPY", "title": "USD/JPY" },
+                    { "proName": "FOREXCOM:GBPJPY", "title": "EUR/JPY" },
+                    { "proName": "FOREXCOM:XAUUSD", "title": "Gold" },
+                    { "proName": "FOREXCOM:USDCAD", "title": "USD/CAD" }
+                ],
+                "showSymbolLogo": true,
+                "colorTheme": "white",
+                "isTransparent": false,
+                "displayMode": "adaptive",
+                "locale": "en"
+            });
+
+            document.querySelector(".tradingview-widget-container__widget").appendChild(script);
+        });
+
+
+        const albums = [
+            ['slike/album1/image.png', 'slike/album1/image.png', 'slike/album1/image.png'],
+            ['slike/album2/slika2.png', 'slike/album2/slika2.png', 'slike/album2/slika2.png'],
+            ['slike/album1/image.png', 'slike/album1/image.png', 'slike/album1/image.png'],
+            ['slike/album2/slika2.png', 'slike/album2/slika2.png', 'slike/album2/slika2.png'],
+            ['slike/album1/image.png', 'slike/album1/image.png', 'slike/album1/image.png']
+        ];
+
+        let currentAlbum = 0;
+        const gallery = document.getElementById('gallery');
+        const overlay = document.getElementById('overlay');
+        const fullImage = document.getElementById('fullImage');
+        const numbers = document.querySelectorAll('.number');
+        function loadAlbum(index) {
+        currentAlbum = index;
+        gallery.innerHTML = '';
+        albums[index].forEach(imgSrc => {
+            let img = document.createElement('img');
+            img.src = imgSrc;
+            img.onclick = () => openOverlay(imgSrc);
+            gallery.appendChild(img);
+        });
+
+        // Update active number
+        numbers.forEach((number, i) => {
+            if (i === index) {
+                number.classList.add('active');
+            } else {
+                number.classList.remove('active');
+            }
+            });
+        }
+
+        function openOverlay(src) {
+            fullImage.src = src;
+            overlay.style.display = 'flex';
+        }
+
+        function closeOverlay() {
+            overlay.style.display = 'none';
+        }
+
+        // Load the first album initially
+    loadAlbum(currentAlbum);
+
+
+
+    </script>
+</body>
+</html>
